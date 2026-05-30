@@ -1,6 +1,6 @@
 /**
  * ==========================================================================
- * Google AI Studio - Smart To-Do Application Engine (Pure Vanilla Javascript)
+ * Google AI Studio - TaskFlow Engine (Pure Vanilla Javascript)
  * Key Highlights: HTML5 Drag & Drop, Local Storage, Priority/Category Filters,
  * Full Text Search, Non-Destructive Undo, and Immersive Dark Mode toggling.
  * ==========================================================================
@@ -14,7 +14,7 @@ const DARK_MODE_KEY = 'smart_todo_dark_mode';
 const DEFAULT_TODOS = [
   {
     id: 'starter-1',
-    title: '🚀 Walkthrough the clean, vanilla CSS layout',
+    title: 'Walkthrough the clean, vanilla CSS layout',
     description: 'Notice how the glassmorphic cards and dark-mode transitions render smoothly without any external frameworks.',
     completed: true,
     priority: 'high',
@@ -24,7 +24,7 @@ const DEFAULT_TODOS = [
   },
   {
     id: 'starter-2',
-    title: '🛠️ Play with the HTML5 Drag & Drop feature',
+    title: 'Play with the HTML5 Drag & Drop feature',
     description: 'Hold a task by its title or anywhere within the card and drag it up/down to sort and save the list order.',
     completed: false,
     priority: 'high',
@@ -34,7 +34,7 @@ const DEFAULT_TODOS = [
   },
   {
     id: 'starter-3',
-    title: '📦 Pick up fresh ingredients for dinner',
+    title: 'Pick up fresh ingredients for dinner',
     description: 'Get bell peppers, chicken breasts, fresh basil, and some olive oil.',
     completed: false,
     priority: 'medium',
@@ -44,7 +44,7 @@ const DEFAULT_TODOS = [
   },
   {
     id: 'starter-4',
-    title: '💡 Sketch website layout ideas in notebook',
+    title: 'Sketch website layout ideas in notebook',
     description: 'Draft initial wireframes for a dashboard layout focusing on minimalist grids and generous spaces.',
     completed: false,
     priority: 'low',
@@ -114,7 +114,7 @@ function saveTodosState() {
 // ==========================================================================
 // Toast Notification Engine
 // ==========================================================================
-function showToast(message, showsUndo = false, duration = 5000) {
+function showToast(message, showsUndo = false, duration = 2000) {
   const toast = document.getElementById('toast-banner');
   const msgEl = document.getElementById('toast-message');
   const undoBtn = document.getElementById('toast-undo-btn');
@@ -359,12 +359,8 @@ function renderTodoList() {
 
       <!-- Edit / Delete Desktop badge sliders -->
       <div class="card-actions-panel">
-        <button class="btn-card-action btn-card-edit" data-id="${todo.id}" title="Edit task detail">
-          ✏️
-        </button>
-        <button class="btn-card-action btn-card-delete" data-id="${todo.id}" title="Delete task permanently">
-          🗑️
-        </button>
+        <button class="btn-card-action btn-card-edit" data-id="${todo.id}" title="Edit task detail">Edit</button>
+        <button class="btn-card-action btn-card-delete" data-id="${todo.id}" title="Delete task permanently">Delete</button>
       </div>
     `;
 
@@ -411,54 +407,170 @@ function renderTodoList() {
       });
     }
 
+    // ----------------------------------------------------------------------
+    // Touch Long Press Interaction for Mobile Edit Trigger
+    // ----------------------------------------------------------------------
+    let touchTimer = null;
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let isLongPressActive = false;
+
+    card.addEventListener('touchstart', (e) => {
+      // Avoid firing on nested interactive elements
+      if (e.target.closest('.toggle-checkbox-btn') || e.target.closest('.card-actions-panel')) {
+        return;
+      }
+
+      isLongPressActive = false;
+      const touch = e.touches[0];
+      touchStartX = touch.clientX;
+      touchStartY = touch.clientY;
+
+      // Tactile scale feedback when pressed down
+      card.style.transform = 'scale(0.975)';
+      card.style.boxShadow = 'inset 0 2px 4px rgba(0,0,0,0.06)';
+      card.style.transition = 'transform 0.15s ease, box-shadow 0.15s ease';
+
+      touchTimer = setTimeout(() => {
+        isLongPressActive = true;
+        
+        // Polished short vibration for standard touch haptic response
+        if (navigator.vibrate) {
+          try {
+            navigator.vibrate(40);
+          } catch (vibErr) {
+            // Fail silent if blocked
+          }
+        }
+
+        // Apply micro scale-up alert to verify long-press activation
+        card.style.transform = 'scale(1.02)';
+        card.style.boxShadow = '0 10px 15px -3px rgba(0, 0, 0, 0.1)';
+
+        setTimeout(() => {
+          card.style.transform = '';
+          card.style.boxShadow = '';
+          openEditModal(todo);
+        }, 120);
+
+      }, 600); // Comfortable standard premium delay
+    }, { passive: true });
+
+    card.addEventListener('touchmove', (e) => {
+      if (!touchTimer) return;
+
+      const touch = e.touches[0];
+      const diffX = Math.abs(touch.clientX - touchStartX);
+      const diffY = Math.abs(touch.clientY - touchStartY);
+
+      // Cancel if scrolled or dragged away
+      if (diffX > 15 || diffY > 15) {
+        clearTimeout(touchTimer);
+        touchTimer = null;
+        card.style.transform = '';
+        card.style.boxShadow = '';
+      }
+    }, { passive: true });
+
+    card.addEventListener('touchend', (e) => {
+      if (touchTimer) {
+        clearTimeout(touchTimer);
+        touchTimer = null;
+      }
+      
+      if (!isLongPressActive) {
+        card.style.transform = '';
+        card.style.boxShadow = '';
+      } else {
+        // Prevent default click event from dispatching post long-press edit
+        e.preventDefault();
+      }
+    });
+
+    card.addEventListener('touchcancel', () => {
+      if (touchTimer) {
+        clearTimeout(touchTimer);
+        touchTimer = null;
+      }
+      card.style.transform = '';
+      card.style.boxShadow = '';
+    });
+
     // ==========================================================================
     // HTML5 Native Drag & Drop Handlers
     // ==========================================================================
+    
+    // 1. Drag Start: Store task ID and configure drag styles
     card.addEventListener('dragstart', (e) => {
+      // Prevent drag initiation from inner form/button inputs
+      if (e.target.closest('.toggle-checkbox-btn') || 
+          e.target.closest('.card-actions-panel') || 
+          e.target.closest('button')) {
+        e.preventDefault();
+        return;
+      }
+
       card.classList.add('dragging');
       e.dataTransfer.effectAllowed = 'move';
       e.dataTransfer.setData('text/plain', todo.id);
+
+      // Defer slightly to allow the browser to clone full-opacity element for drag-ghost
+      setTimeout(() => {
+        card.style.opacity = '0.35';
+      }, 0);
     });
 
+    // 2. Drag End: Reset local styles and clear all hover markers
     card.addEventListener('dragend', () => {
       card.classList.remove('dragging');
+      card.style.opacity = '';
+      
       const allCards = container.querySelectorAll('.todo-card');
-      allCards.forEach(c => c.classList.remove('drag-over'));
+      allCards.forEach(c => {
+        c.classList.remove('drag-over');
+      });
     });
 
+    // 3. Drag Over: Necessary to permit dropped actions and visual target indicator
     card.addEventListener('dragover', (e) => {
-      // Required to accept dropped elements
       e.preventDefault();
-      
       const draggingElement = container.querySelector('.dragging');
       if (draggingElement && draggingElement !== card) {
         card.classList.add('drag-over');
       }
     });
 
+    // 4. Drag Enter: Prevent standard defaults
+    card.addEventListener('dragenter', (e) => {
+      e.preventDefault();
+    });
+
+    // 5. Drag Leave: Erase visual drag-over indicator
     card.addEventListener('dragleave', () => {
       card.classList.remove('drag-over');
     });
 
+    // 6. Drop Event: Reorder underlying tasks index state & commit update
     card.addEventListener('drop', (e) => {
       e.preventDefault();
       card.classList.remove('drag-over');
-      
+
       const draggedId = e.dataTransfer.getData('text/plain');
       if (!draggedId || draggedId === todo.id) return;
 
       const draggedIndex = todos.findIndex(t => t.id === draggedId);
       const targetIndex = todos.findIndex(t => t.id === todo.id);
 
+      // Validation check to prevent execution of invalid drops (Requirement 9)
       if (draggedIndex !== -1 && targetIndex !== -1) {
-        // Splice item out and insert at new index
+        // Splice dragged task out and insert at the target's relative index
         const [movedTask] = todos.splice(draggedIndex, 1);
         todos.splice(targetIndex, 0, movedTask);
 
-        // Commit order to storage and re-render
+        // Save order and refresh UI immediately
         saveTodosState();
         renderTodoList();
-        showToast('Task reordered successfully!');
+        showToast('🎉 Task reordered successfully!');
       }
     });
 

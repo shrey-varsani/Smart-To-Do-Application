@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Google AI Studio - Smart To-Do Application - Vanilla Stylesheet
+   Google AI Studio - TaskFlow - Vanilla Stylesheet
    Designed with precision: Fluid layouts, modern typography, & native styling
    ========================================================================== */
 
@@ -16,7 +16,7 @@
   --c-light: #f1f5f9;
   --c-dark: #0b0f19;
   --c-muted: #64748b;
-  --c-primary: #4f46e5;
+  --c-primary: #46A6CF;
   --c-emerald: #10b981;
   --c-rose: #f43f5e;
 
@@ -94,8 +94,7 @@ html.dark {
 
   --violet-bg: var(--c-dark);
   --violet-text: var(--c-primary);
-}
-
+} 
 /* ==========================================================================
    Base resets and System layout setup
    ========================================================================== */
@@ -862,6 +861,7 @@ html.dark .todo-card.drag-over {
   color: var(--text-main);
   line-height: 1.35;
   word-break: break-word;
+  padding-right: 5.5rem;
 }
 
 .todo-card.completed .card-title {
@@ -956,11 +956,6 @@ html.dark .todo-card.drag-over {
   padding: 0.15rem 0.5rem;
 }
 
-.badge-calendar-tag::before {
-  content: '📅';
-  font-size: 0.75rem;
-}
-
 .badge-calendar-tag.overdue {
   color: var(--rose-text);
   background-color: var(--rose-bg);
@@ -1000,8 +995,11 @@ html.dark .todo-card.drag-over {
 .btn-card-action {
   background-color: transparent;
   border: none;
-  font-size: 0.85rem;
-  padding: 0.45rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.25rem 0.5rem;
   border-radius: var(--radius-sm);
   cursor: pointer;
   color: var(--text-muted);
