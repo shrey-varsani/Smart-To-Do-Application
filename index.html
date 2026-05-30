@@ -106,6 +106,24 @@
             </div>
           </section>
 
+          <!-- Backup and Recovery Panel -->
+          <section class="panel-card">
+            <h2 class="panel-title">
+              <span class="title-accent">💾</span> Sync & Backup
+            </h2>
+            <div class="backup-container">
+              <p class="backup-desc">Backup your active to-dos or load an existing workflow JSON file.</p>
+              <div id="file-drop-zone" class="file-drop-zone">
+                <div class="drop-zone-icon">📥</div>
+                <p class="drop-zone-text">Drag & drop <strong>backup.json</strong> here or <span class="drop-zone-accent">browse files</span></p>
+                <input type="file" id="backup-file-input" accept=".json" class="file-input-hidden" />
+              </div>
+              <button id="export-backup-btn" class="btn-export-backup" type="button">
+                <span>📤</span> Export Tasks JSON
+              </button>
+            </div>
+          </section>
+
           <!-- Pro Tip Banner -->
           <div class="tip-banner">
             <span class="tip-icon">💡</span>

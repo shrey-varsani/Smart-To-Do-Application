@@ -767,6 +767,128 @@ function bootstrapApp() {
     });
   }
 
+  // 13. Backup & Recovery drag & drop and manual file selection listeners
+  const fileDropZone = document.getElementById('file-drop-zone');
+  const backupFileInput = document.getElementById('backup-file-input');
+  const exportBackupBtn = document.getElementById('export-backup-btn');
+
+  if (fileDropZone && backupFileInput) {
+    // Drag Over visual highlight states
+    ['dragenter', 'dragover'].forEach(eventName => {
+      fileDropZone.addEventListener(eventName, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        fileDropZone.classList.add('drag-active');
+      }, false);
+    });
+
+    ['dragleave', 'drop'].forEach(eventName => {
+      fileDropZone.addEventListener(eventName, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        fileDropZone.classList.remove('drag-active');
+      }, false);
+    });
+
+    // Detect dropped files
+    fileDropZone.addEventListener('drop', (e) => {
+      const dt = e.dataTransfer;
+      const files = dt.files;
+      if (files && files.length > 0) {
+        handleBackupFileLoad(files[0]);
+      }
+    });
+
+    // Detect click manual selection
+    backupFileInput.addEventListener('change', (e) => {
+      if (e.target.files && e.target.files.length > 0) {
+        handleBackupFileLoad(e.target.files[0]);
+      }
+    });
+  }
+
+  // Parse, validated and sync imported checklist list
+  function handleBackupFileLoad(file) {
+    if (!file) return;
+    if (file.type !== 'application/json' && !file.name.endsWith('.json')) {
+      showToast('❌ Invalid format. Please load a valid JSON file.');
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      try {
+        const importedData = JSON.parse(event.target.result);
+        if (Array.isArray(importedData)) {
+          const validatedTasks = importedData.map(task => {
+            return {
+              id: task.id || 'task-' + Math.random().toString(36).substring(2, 11),
+              title: typeof task.title === 'string' ? task.title : 'Unnamed task',
+              description: typeof task.description === 'string' ? task.description : '',
+              completed: !!task.completed,
+              priority: ['low', 'medium', 'high'].includes(task.priority) ? task.priority : 'medium',
+              category: typeof task.category === 'string' ? task.category : 'personal',
+              dueDate: typeof task.dueDate === 'string' ? task.dueDate : new Date().toISOString().split('T')[0],
+              createdAt: typeof task.createdAt === 'number' ? task.createdAt : Date.now()
+            };
+          });
+
+          const existingIds = new Set(todos.map(t => t.id));
+          let importCount = 0;
+          validatedTasks.forEach(task => {
+            if (!existingIds.has(task.id)) {
+              todos.unshift(task);
+              importCount++;
+            } else {
+              const idx = todos.findIndex(t => t.id === task.id);
+              if (idx !== -1) {
+                todos[idx] = task;
+                importCount++;
+              }
+            }
+          });
+
+          saveTodosState();
+          renderTodoList();
+          showToast(`📥 Successfully imported ${importCount} tasks!`);
+        } else {
+          showToast('❌ JSON contents must be a list of tasks.');
+        }
+      } catch (err) {
+        console.error('File parsing error:', err);
+        showToast('❌ Failed to parse backup. Check JSON formatting.');
+      }
+      
+      if (backupFileInput) backupFileInput.value = '';
+    };
+
+    reader.readAsText(file);
+  }
+
+  // Backup Export Action trigger
+  if (exportBackupBtn) {
+    exportBackupBtn.addEventListener('click', () => {
+      try {
+        const content = JSON.stringify(todos, null, 2);
+        const blob = new Blob([content], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        
+        const aElement = document.createElement('a');
+        aElement.href = url;
+        aElement.download = `smart_todo_backup_${new Date().toISOString().split('T')[0]}.json`;
+        document.body.appendChild(aElement);
+        aElement.click();
+        
+        document.body.removeChild(aElement);
+        URL.revokeObjectURL(url);
+        showToast('📤 Backup exported successfully!');
+      } catch (err) {
+        console.error('Failed to export tasks:', err);
+        showToast('❌ Export failed. Please try again.');
+      }
+    });
+  }
+
   // Final initial load
   syncActiveTabsHighlight();
   renderTodoList();
