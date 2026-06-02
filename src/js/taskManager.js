@@ -1,6 +1,6 @@
-/* ==========================================================================
-   TaskManager State Engine & Operations
-   ========================================================================== */
+
+  // TaskManager State Engine & Operations
+
 
 import { getStorageItem, setStorageItem, STORAGE_KEY } from './storage.js';
 

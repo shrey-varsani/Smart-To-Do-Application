@@ -1,6 +1,6 @@
-/* ==========================================================================
-   LocalStorage Persistence Utilities
-   ========================================================================== */
+
+  //  LocalStorage Persistence Utilities
+
 
 export const STORAGE_KEY = 'smart_todo_app_data';
 export const DARK_MODE_KEY = 'smart_todo_dark_mode';

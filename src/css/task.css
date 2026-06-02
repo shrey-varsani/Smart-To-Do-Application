@@ -298,6 +298,7 @@ Form Fields, Cards Layout, Checkboxes, Badges, and Action Panels */
   margin-top: 0.25rem;
   word-break: break-word;
   display: -webkit-box;
+  line-clamp: 2;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;

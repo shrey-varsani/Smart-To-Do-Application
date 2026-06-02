@@ -1,6 +1,6 @@
-/* ==========================================================================
-   TaskFlow - App Bootstrapper & Event Handlers
-   ========================================================================== */
+
+//  TaskFlow - App Bootstrapper & Event Handlers
+
 
 import {
   loadTodosState,
@@ -24,11 +24,11 @@ import {
 } from "./ui.js";
 
 function bootstrapApp() {
-  // 1. Initial State Sync
+  // Initial State Sync
   loadTodosState();
   initDarkMode();
 
-  // 2. Add New Task submission
+  // Add New Task submission
   const addTaskForm = document.getElementById("add-task-form");
   if (addTaskForm) {
     addTaskForm.addEventListener("submit", (e) => {
@@ -70,7 +70,7 @@ function bootstrapApp() {
     });
   }
 
-  // 3. Setup Interactive priority selection buttons click feedback
+  // Setup Interactive priority selection buttons click feedback
   const priorityButtons = document.querySelectorAll(
     "#priority-selector .priority-btn",
   );
@@ -102,7 +102,7 @@ function bootstrapApp() {
     });
   });
 
-  // 4. Edit Modal Submit click
+  // Edit Modal Submit click
   const editTaskForm = document.getElementById("edit-task-form");
   if (editTaskForm) {
     editTaskForm.addEventListener("submit", (e) => {
@@ -133,7 +133,7 @@ function bootstrapApp() {
     });
   }
 
-  // 5. Cancel and overlay actions for Edit Modal
+  // Cancel and overlay actions for Edit Modal
   const cancelBtn = document.getElementById("modal-cancel-btn");
   const closeBtn = document.getElementById("modal-close-btn");
   const overlay = document.getElementById("edit-modal-overlay");
@@ -148,7 +148,7 @@ function bootstrapApp() {
     });
   }
 
-  // 6. Search Bar listener
+  // Search Bar listener
   const searchInput = document.getElementById("search-bar");
   if (searchInput) {
     searchInput.addEventListener("input", (e) => {
@@ -157,7 +157,7 @@ function bootstrapApp() {
     });
   }
 
-  // 7. Select Priority filter listener
+  // Select Priority filter listener
   const prioritySelect = document.getElementById("filter-priority");
   if (prioritySelect) {
     prioritySelect.addEventListener("change", (e) => {
@@ -166,7 +166,7 @@ function bootstrapApp() {
     });
   }
 
-  // 8. Select Category filter listener
+  // Select Category filter listener
   const categorySelect = document.getElementById("filter-category");
   if (categorySelect) {
     categorySelect.addEventListener("change", (e) => {
@@ -175,7 +175,7 @@ function bootstrapApp() {
     });
   }
 
-  // 9. Set Status filter tab triggers
+  // Set Status filter tab triggers
   const tabsList = document.querySelectorAll("#status-filter-tabs .tab-btn");
   tabsList.forEach((tab) => {
     tab.addEventListener("click", () => {
@@ -188,7 +188,7 @@ function bootstrapApp() {
     });
   });
 
-  // 10. Clear Completed trigger click
+  // Clear Completed trigger click
   const clearCompletedBtn = document.getElementById("clear-completed-btn");
   if (clearCompletedBtn) {
     clearCompletedBtn.addEventListener("click", () => {
@@ -244,7 +244,7 @@ function bootstrapApp() {
   renderTodoList();
 }
 
-// Bind bootstrap on load
+// on load
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", bootstrapApp);
 } else {
