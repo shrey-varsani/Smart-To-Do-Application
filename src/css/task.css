@@ -1,6 +1,6 @@
-/* ==========================================================================
-   Form Fields, Cards Layout, Checkboxes, Badges, and Action Panels
-   ========================================================================== */
+/* 
+Form Fields, Cards Layout, Checkboxes, Badges, and Action Panels */
+
 
 .task-form {
   display: flex;
@@ -44,7 +44,7 @@
   resize: none;
 }
 
-/* Priority interactive selectors row */
+/* Priority row */
 .priority-btn-group {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -191,9 +191,9 @@
 }
 
 
-/* ==========================================================================
-   Tasks Grid Stack, Card Typography, Checkbox Nodes, Badges and Actions
-   ========================================================================== */
+
+   /* Tasks Grid Stack, Card Typography, Checkbox Nodes, Badges and Actions */
+
 
 .todo-list-stack {
   display: flex;
@@ -270,7 +270,7 @@
   100% { transform: scale(1); }
 }
 
-/* Typography styles for task cards */
+/* styles for task cards */
 .card-content {
   flex: 1;
   min-width: 0;
@@ -329,7 +329,7 @@
   gap: 0.25rem;
 }
 
-/* Category individual themes dynamic overrides */
+/* Category individual themes */
 .badge-category-work {
   background-color: var(--bg-accent);
   color: var(--primary);
@@ -367,7 +367,7 @@
   font-weight: 800;
 }
 
-/* Dynamic Due date tags warning styling */
+/* date tags warning styling */
 .badge-calendar-tag {
   font-size: 0.725rem;
   font-weight: 500;
