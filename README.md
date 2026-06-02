@@ -1,5 +1,4 @@
 # TaskFlow
-
 A clean and powerful task manager designed to help you stay organized without the clutter.
 
 ## Why TaskFlow?
@@ -9,7 +8,7 @@ TaskFlow combines a minimalist interface with advanced tools like drag-and-drop 
 ## Live Demo
 
 You can explore the live application here:
-**[Your Vercel App Link Goes Here]**
+**[TaskFlow Live Preview]**
 
 ## Features at a Glance
 
@@ -20,12 +19,3 @@ You can explore the live application here:
 - **Data Portability:** Export your entire task list for safekeeping and import it back anytime.
 - **Safety First:** A "Non-destructive Undo" feature lets you recover deleted tasks instantly.
 
-## Running Locally
-
-If you'd like to dive into the code and run the project on your own machine:
-
-1. **Environment:** Create a local environment file and add your `SERVICE_API_KEY`.
-2. **Setup:** Use the standard package manager to install the project dependencies.
-3. **Execution:** Boot the development server to view the app in your browser.
-
-The project is designed for seamless deployment—simply push your changes to a platform like Vercel to see them live.

@@ -1,8 +1,7 @@
 /**
  * ==========================================================================
- * Google AI Studio - TaskFlow Engine (Pure Vanilla Javascript)
- * Key Highlights: HTML5 Drag & Drop, Local Storage, Priority/Category Filters,
- * Full Text Search, Non-Destructive Undo, and Immersive Dark Mode toggling.
+ * TaskFlow Core Logic
+ * Handles task organization, state persistence, and interface interactions.
  * ==========================================================================
  */
 
@@ -14,8 +13,8 @@ const DARK_MODE_KEY = 'smart_todo_dark_mode';
 const DEFAULT_TODOS = [
   {
     id: 'starter-1',
-    title: 'Walkthrough the clean, vanilla CSS layout',
-    description: 'Notice how the glassmorphic cards and dark-mode transitions render smoothly without any external frameworks.',
+    title: 'Explore the custom interface',
+    description: 'Notice the smooth transitions and card layouts designed for clarity.',
     completed: true,
     priority: 'high',
     category: 'work',
@@ -24,8 +23,8 @@ const DEFAULT_TODOS = [
   },
   {
     id: 'starter-2',
-    title: 'Play with the HTML5 Drag & Drop feature',
-    description: 'Hold a task by its title or anywhere within the card and drag it up/down to sort and save the list order.',
+    title: 'Organize your tasks manually',
+    description: 'Click and hold any task to drag it into your preferred order.',
     completed: false,
     priority: 'high',
     category: 'work',
