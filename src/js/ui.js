@@ -300,7 +300,7 @@ export function bindDragDropEvents(
     if (success) {
       renderCallback();
       if (toastCallback) {
-        toastCallback("🎉 Task reordered successfully!");
+        toastCallback("Task reordered successfully!");
       }
     }
   });
@@ -349,7 +349,7 @@ export function renderTodoList() {
     const emptyCard = document.createElement("div");
     emptyCard.className = "empty-placeholder-card";
     emptyCard.innerHTML = `
-      <div class="empty-icon">🔍</div>
+      <div class="empty-icon"></div>
       <h4 class="empty-title">No matching tasks found</h4>
       <p class="empty-subtitle">Try refining your selection criteria, clearing search keywords, or creating a brand new task above!</p>
       ${
@@ -447,7 +447,7 @@ export function renderTodoList() {
         if (updated) {
           showToast(
             updated.completed
-              ? "🎉 Task completed successfully!"
+              ? "Task completed successfully!"
               : "Task returned to active deck.",
           );
         }

@@ -66,7 +66,7 @@ function bootstrapApp() {
       if (dueInput) dueInput.value = "";
 
       renderTodoList();
-      showToast("🚀 Task added as active!");
+      showToast("Task added as active!");
     });
   }
 
@@ -128,7 +128,7 @@ function bootstrapApp() {
 
         closeEditModal();
         renderTodoList();
-        showToast("🛠️ Task saved successfully!");
+        showToast("Task saved successfully!");
       }
     });
   }
@@ -199,7 +199,7 @@ function bootstrapApp() {
       }
 
       renderTodoList();
-      showToast(`🧹 Cleared ${count} completed tasks!`);
+      showToast(`Cleared ${count} completed tasks!`);
     });
   }
 
@@ -220,7 +220,7 @@ function bootstrapApp() {
         }
 
         renderTodoList();
-        showToast("↩️ Task restored successfully!");
+        showToast("Task restored successfully!");
       }
     });
   }
@@ -232,9 +232,9 @@ function bootstrapApp() {
       const isDark = toggleDarkMode();
 
       if (isDark) {
-        showToast("☀️ Switched to Dark Theme", false, 2000);
+        showToast("Switched to Dark Theme", false, 2000);
       } else {
-        showToast("🌙 Switched to Light Theme", false, 2000);
+        showToast("Switched to Light Theme", false, 2000);
       }
     });
   }
