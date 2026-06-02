@@ -1,6 +1,3 @@
-/* ==========================================================================
-   Filter Deck Layout, Search Bar, Active Navigation Tabs, and Reset Buttons
-   ========================================================================== */
 
 .feed-column {
   display: flex;
@@ -145,10 +142,7 @@
   border-radius: var(--radius-round);
 }
 
-
-/* ==========================================================================
-   Dark Mode Custom Variables & Component Overrides
-   ========================================================================== */
+   /* Dark Mode */
 
 html.dark {
   --bg-app: var(--c-dark);
@@ -209,10 +203,7 @@ html.dark .todo-card.drag-over {
   background-color: rgba(99, 102, 241, 0.06);
 }
 
-
-/* ==========================================================================
-   HTML5 Drag and Drop Cursor, Ghost-states, and Drop Targets
-   ========================================================================== */
+   /* HTML5 Drag and Drop Cursor */
 
 /* Grabbing states */
 .todo-card[draggable="true"] {
