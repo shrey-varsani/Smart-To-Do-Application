@@ -1,0 +1,526 @@
+/* ==========================================================================
+   CSS Variables Definitions
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Carter+One&family=Chicle&family=DynaPuff:wght@400..700&family=M+PLUS+Rounded+1c:wght@300;400;500;700;800&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Sour+Gummy:wght@400..700&display=swap');
+
+:root {
+  --font-sans: "PT Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-display: "M PLUS Rounded 1c", sans-serif;
+  --font-title: "Carter One", "DynaPuff", "Chicle", cursive;
+
+  /* 7 Handcrafted Core Colors */
+  --c-white: #ffffff;
+  --c-light: #f1f5f9;
+  --c-dark: #0b0f19;
+  --c-muted: #64748b;
+  --c-primary: #46A6CF;
+  --c-emerald: #10b981;
+  --c-rose: #f43f5e;
+
+  /* Classic High-Contrast Handcrafted Light Colors */
+  --bg-app: var(--c-light);
+  --bg-card: var(--c-white);
+  --bg-input: var(--c-light);
+  --bg-accent: var(--c-light);
+  --text-main: var(--c-dark);
+  --text-muted: var(--c-muted);
+  --text-inverse: var(--c-white);
+
+  --border-light: var(--c-light);
+  --border-focus: var(--c-primary);
+  --border-active: var(--c-primary);
+
+  --primary: var(--c-primary);
+  --primary-hover: var(--c-primary);
+  --primary-glow: transparent;
+
+  --emerald: var(--c-emerald);
+  --emerald-bg: var(--c-light);
+  --emerald-text: var(--c-emerald);
+
+  --rose: var(--c-rose);
+  --rose-bg: var(--c-light);
+  --rose-text: var(--c-rose);
+
+  --amber: var(--c-muted);
+  --amber-bg: var(--c-light);
+  --amber-text: var(--c-muted);
+
+  --violet: var(--c-primary);
+  --violet-bg: var(--c-light);
+  --violet-text: var(--c-primary);
+
+  /* Shadows and Transitions */
+  --shadow-sm: none;
+  --shadow-md: none;
+  --shadow-lg: none;
+  --shadow-glow: none;
+  
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-round: 9999px;
+
+  --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ==========================================================================
+   Base Resets, System Layout grid, Panels, and Notifications
+   ========================================================================== */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-app);
+  color: var(--text-main);
+  line-height: 1.5;
+  transition: background-color var(--transition-normal), color var(--transition-normal);
+  min-height: 100vh;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+/* Fluid Main Container setup */
+.app-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Typography and Headings */
+h1, h2, h3, h4, .panel-title, .highlight-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* 2-Column Application Layout Grid */
+.app-content-grid {
+  display: grid;
+  grid-template-columns: 350px 1fr;
+  align-items: start;
+  gap: 2rem;
+}
+
+/* Side panels components (Left Column) */
+.sidebar-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Premium styled Panel card container */
+.panel-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-md);
+  transition: border-color var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.panel-title {
+  font-size: 1.15rem;
+  color: var(--text-main);
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.title-accent {
+  color: var(--primary);
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+/* Gradient Dashboard Stats Box (Left Column) */
+.highlight-card {
+  position: relative;
+  background-color: var(--primary);
+  color: var(--text-inverse);
+  border: none;
+  overflow: hidden;
+}
+
+.highlight-card::after {
+  content: '📋';
+  position: absolute;
+  right: -20px;
+  bottom: -20px;
+  font-size: 9rem;
+  opacity: 0.08;
+  pointer-events: none;
+}
+
+.highlight-title {
+  color: var(--text-inverse);
+  font-size: 1.15rem;
+  margin-bottom: 0.25rem;
+}
+
+.highlight-subtitle {
+  color: var(--text-inverse);
+  font-size: 0.75rem;
+  margin-bottom: 1.5rem;
+  opacity: 0.85;
+}
+
+.highlight-stats-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.stats-text-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.stats-percentage {
+  font-size: 2.25rem;
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.stats-count {
+  color: var(--text-inverse);
+  font-size: 0.75rem;
+  font-weight: 500;
+  opacity: 0.85;
+}
+
+/* Absolute Dial progress layout inside stats-card */
+.progress-indicator {
+  position: relative;
+  width: 72px;
+  height: 72px;
+  border-radius: var(--radius-round);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.progress-ring-track {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-round);
+  border: 4px solid rgba(255, 255, 255, 0.2);
+}
+
+.progress-ring-fill {
+  position: absolute;
+  inset: -4px;
+  border-radius: var(--radius-round);
+  border: 4px solid var(--text-inverse);
+  transition: clip-path 0.4s ease-in-out, border-color 0.4s ease-in-out;
+}
+
+.progress-ring-fill.complete {
+  border-color: var(--emerald);
+}
+
+.progress-remaining-badge {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+/* Tip info block banner */
+.tip-banner {
+  display: flex;
+  align-items: start;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  background-color: var(--bg-card);
+  border: 1px dashed var(--border-light);
+  border-radius: var(--radius-md);
+}
+
+.tip-icon {
+  font-size: 1.15rem;
+  line-height: 1.2;
+}
+
+.tip-text {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+}
+
+/* ==========================================================================
+   Header & Navigation Components
+   ========================================================================== */
+
+.app-header {
+  border-bottom: 1px solid var(--border-light);
+  padding-bottom: 1.5rem;
+  transition: border-color var(--transition-normal);
+}
+
+.header-main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.header-logo-container {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.header-title {
+  font-family: var(--font-title);
+  font-weight: 400;
+  font-size: 2.25rem;
+  color: var(--text-main);
+  line-height: 1.1;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.header-subtitle {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  margin-top: 0.35rem;
+  max-width: 600px;
+}
+
+.header-icon-badge {
+  font-size: 2.25rem;
+  padding: 0.5rem;
+  background-color: var(--primary);
+  color: #fff;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-glow);
+  line-height: 1;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.progress-status {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.85rem;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  box-shadow: var(--shadow-sm);
+}
+
+.progress-status::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  background-color: var(--emerald);
+  border-radius: var(--radius-round);
+  display: inline-block;
+  animation: pulse 2s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 1; outline: 0px solid rgba(16, 185, 129, 0); }
+  50% { transform: scale(1.15); opacity: 0.8; outline: 3px solid rgba(16, 185, 129, 0.4); }
+}
+
+/* Custom Theme Toggle button */
+.theme-toggle-btn {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  outline: none;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-fast);
+}
+
+.theme-toggle-btn:hover {
+  cursor: pointer;
+  background-color: var(--bg-input);
+  border-color: var(--text-muted);
+}
+
+/* Dynamic Sun/Moon CSS icons */
+.theme-btn-icon {
+  position: relative;
+  width: 18px;
+  height: 18px;
+  border-radius: var(--radius-round);
+  background-color: transparent;
+  box-shadow: inset -5px -5px 0 0 var(--text-main);
+  transition: transform 0.4s ease, box-shadow 0.4s ease, background-color 0.4s ease;
+}
+
+/* ==========================================================================
+   TOAST BANNER NOTIFICATIONS
+   ========================================================================== */
+.toast-wrapper {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translate(-50%, 0);
+  background-color: var(--text-main);
+  color: var(--bg-card);
+  border-radius: var(--radius-md);
+  padding: 0.85rem 1.25rem;
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  z-index: 9999;
+  max-width: 380px;
+  width: calc(100% - 2rem);
+  opacity: 1;
+  visibility: visible;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, visibility 0.3s;
+}
+
+.toast-wrapper.hidden {
+  transform: translate(-50%, 1.5rem);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.toast-content {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.toast-dot {
+  width: 8px;
+  height: 8px;
+  background-color: var(--emerald);
+  border-radius: var(--radius-round);
+}
+
+.toast-text {
+  font-size: 0.825rem;
+  font-weight: 500;
+}
+
+.toast-undo-btn {
+  background-color: transparent;
+  border: none;
+  color: #818cf8;
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.toast-undo-btn:hover {
+  text-decoration: underline;
+  color: #a5b4fc;
+}
+
+/* ==========================================================================
+   INTERACTIVE MODALS
+   ========================================================================== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(15, 23, 42, 0.6);
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  z-index: 10000;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.3s ease, visibility 0.3s;
+}
+
+.modal-overlay.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.modal-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: var(--shadow-lg);
+  transform: scale(1);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modal-overlay.hidden .modal-card {
+  transform: scale(0.95);
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border-light);
+  padding-bottom: 0.75rem;
+}
+
+.modal-title {
+  font-size: 1.25rem;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-modal-close {
+  background-color: transparent;
+  border: none;
+  font-size: 1rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: var(--radius-round);
+}
+
+.btn-modal-close:hover {
+  color: var(--text-main);
+  background-color: var(--bg-input);
+}
