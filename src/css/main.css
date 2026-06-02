@@ -1,7 +1,3 @@
-/* ==========================================================================
-   CSS Variables Definitions
-   ========================================================================== */
-
 @import url('https://fonts.googleapis.com/css2?family=Carter+One&family=Chicle&family=DynaPuff:wght@400..700&family=M+PLUS+Rounded+1c:wght@300;400;500;700;800&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Sour+Gummy:wght@400..700&display=swap');
 
 :root {
@@ -9,7 +5,7 @@
   --font-display: "M PLUS Rounded 1c", sans-serif;
   --font-title: "Carter One", "DynaPuff", "Chicle", cursive;
 
-  /* 7 Handcrafted Core Colors */
+  /* 7 Core Colors */
   --c-white: #ffffff;
   --c-light: #f1f5f9;
   --c-dark: #0b0f19;
@@ -18,7 +14,7 @@
   --c-emerald: #10b981;
   --c-rose: #f43f5e;
 
-  /* Classic High-Contrast Handcrafted Light Colors */
+  /* Classic High-Contrast and Light Colors */
   --bg-app: var(--c-light);
   --bg-card: var(--c-white);
   --bg-input: var(--c-light);
@@ -66,9 +62,7 @@
   --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* ==========================================================================
-   Base Resets, System Layout grid, Panels, and Notifications
-   ========================================================================== */
+/* Base Resets, System Layout grid, Panels, and Notifications */
 
 * {
   box-sizing: border-box;
@@ -89,7 +83,7 @@ body {
   overflow-x: hidden;
 }
 
-/* Fluid Main Container setup */
+/* Main Container setup */
 .app-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -114,14 +108,14 @@ h1, h2, h3, h4, .panel-title, .highlight-title {
   gap: 2rem;
 }
 
-/* Side panels components (Left Column) */
+/* Side panels components */
 .sidebar-column {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
 }
 
-/* Premium styled Panel card container */
+/* Panel card container */
 .panel-card {
   background-color: var(--bg-card);
   border: 1px solid var(--border-light);
@@ -243,7 +237,7 @@ h1, h2, h3, h4, .panel-title, .highlight-title {
   letter-spacing: 0.02em;
 }
 
-/* Tip info block banner */
+/* block banner */
 .tip-banner {
   display: flex;
   align-items: start;
@@ -265,9 +259,8 @@ h1, h2, h3, h4, .panel-title, .highlight-title {
   line-height: 1.45;
 }
 
-/* ==========================================================================
-   Header & Navigation Components
-   ========================================================================== */
+
+/* Header & Navigation Components */
 
 .app-header {
   border-bottom: 1px solid var(--border-light);
@@ -374,7 +367,7 @@ h1, h2, h3, h4, .panel-title, .highlight-title {
   border-color: var(--text-muted);
 }
 
-/* Dynamic Sun/Moon CSS icons */
+/* Sun/Moon CSS icons */
 .theme-btn-icon {
   position: relative;
   width: 18px;
@@ -385,9 +378,8 @@ h1, h2, h3, h4, .panel-title, .highlight-title {
   transition: transform 0.4s ease, box-shadow 0.4s ease, background-color 0.4s ease;
 }
 
-/* ==========================================================================
-   TOAST BANNER NOTIFICATIONS
-   ========================================================================== */
+/* TOAST BANNER NOTIFICATIONS */
+
 .toast-wrapper {
   position: fixed;
   bottom: 1.5rem;
@@ -452,9 +444,6 @@ h1, h2, h3, h4, .panel-title, .highlight-title {
   color: #a5b4fc;
 }
 
-/* ==========================================================================
-   INTERACTIVE MODALS
-   ========================================================================== */
 .modal-overlay {
   position: fixed;
   inset: 0;
