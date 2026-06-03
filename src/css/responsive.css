@@ -1,4 +1,8 @@
+/* ==========================================================================
+   Responsive Adaptations & Support for Touch/Desktop layouts
+   ========================================================================== */
 
+/* 1. Tablet Screens & Landscape Viewports (up to 1024px width) */
 @media (max-width: 1024px) {
   .app-content-grid {
     grid-template-columns: 1fr;
@@ -11,65 +15,205 @@
     gap: 1.5rem;
     align-items: stretch;
   }
-  
-  .tip-banner {
-    grid-column: span 2;
-  }
 }
 
+/* 2. Mobile Screens & Portrait Tablet Viewports (up to 768px width)
+   Aligns layout strictly into a single-column block format in the designated order:
+   Quick Add Task -> Progress Summary -> Search & Filters -> Todo List
+   ========================================================================== */
 @media (max-width: 768px) {
-  .filter-controls-row {
-    flex-direction: column;
-    align-items: stretch;
+  .app-container {
+    padding: 1.25rem 0.75rem;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
   }
-  
-  .select-group {
+
+  /* Convert the content layout into a single column */
+  .app-content-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1.5rem;
     width: 100%;
   }
 
-  .card-actions-panel {
-    opacity: 1; /* Always visible on touch screens */
-  }
-}
-
-@media (max-width: 640px) {
-  .app-container {
-    padding: 1.5rem 1rem;
-  }
-
+  /* Force the side panel column to stack vertically: Quick Add -> Progress Summary */
   .sidebar-column {
-    grid-template-columns: 1fr;
+    display: flex !important;
+    flex-direction: column !important;
+    grid-template-columns: none !important;
+    width: 100% !important;
+    gap: 1.5rem;
   }
-  
-  .tip-banner {
-    grid-column: span 1;
+
+  .feed-column {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    gap: 1.25rem;
+  }
+
+  .panel-card {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 1.25rem;
+  }
+
+  /* Quick Form fields stacking (Category & Due Date side-by-side matches single line flow) */
+  .form-row {
+    grid-template-columns: 1fr !important;
+    gap: 1rem;
+  }
+
+  /* Modal Form row stacking */
+  .form-row-three {
+    grid-template-columns: 1fr !important;
+    gap: 1rem;
+  }
+
+  /* Filter Area Stack */
+  .filter-deck {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 1.25rem;
+  }
+
+  .filter-controls-row {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 1rem;
+    width: 100%;
+  }
+
+  .search-bar-wrapper {
+    width: 100%;
+  }
+
+  .select-group {
+    width: 100% !important;
+    display: flex !important;
+    gap: 0.75rem;
+  }
+
+  .filter-select {
+    flex: 1;
+    min-width: 0;
+    width: 100%;
+  }
+
+  .filter-tabs-row {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 1rem;
+    width: 100%;
+  }
+
+  .tabs-group {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .tab-btn {
+    flex: 1;
+    text-align: center;
+    padding: 0.5rem 0.25rem;
+  }
+
+  .btn-clear {
+    width: 100%;
+    justify-content: center;
+    padding: 0.5rem 0;
+    margin-top: 0.25rem;
+  }
+
+  /* ----------------------------------------------------------------------
+     Task Cards mobile layout adjustments (Thumb-friendly & prevents overlap)
+     ---------------------------------------------------------------------- */
+  .todo-card {
+    padding: 1.25rem 1rem 3.75rem 1rem !important; /* Generate bottom space for static buttons */
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    align-items: start;
+    gap: 0.75rem;
+  }
+
+  /* Reposition Edit/Delete actions in bottom-right corner to prevent overlapping title text */
+  .card-actions-panel {
+    position: absolute;
+    bottom: 0.85rem;
+    right: 1rem;
+    top: auto !important;
+    left: auto !important;
+    opacity: 1 !important; /* Permanently visible on mobile viewports */
+    display: flex;
+    gap: 0.35rem;
+  }
+
+  /* Force badges to wrap and limit aggregate width so they cannot slide under buttons */
+  .card-badges-row {
+    max-width: calc(100% - 115px) !important;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin-top: 0.75rem;
+  }
+
+  /* ----------------------------------------------------------------------
+     Header details & layout
+     ---------------------------------------------------------------------- */
+  .app-header {
+    padding-bottom: 1.25rem;
+  }
+
+  .header-main {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .header-actions {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 
   .header-title {
     font-size: 1.75rem;
   }
+
+  /* Edit Dialog Modal Adjustments */
+  .modal-card {
+    width: 92% !important;
+    max-width: 480px;
+    padding: 1.25rem;
+  }
+}
+
+/* 3. Small Screen Optimizations (up to 480px width) */
+@media (max-width: 480px) {
+  .header-title {
+    font-size: 1.5rem;
+  }
   
-  .form-row-three {
-    grid-template-columns: 1fr;
-    gap: 1rem;
+  .header-subtitle {
+    font-size: 0.75rem;
   }
 
-  .filter-tabs-row {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  
-  .tabs-group {
-    width: 100%;
-    justify-content: space-between;
-  }
-  
   .tab-btn {
-    flex: 1;
-    text-align: center;
+    font-size: 0.7rem;
+    padding: 0.5rem 0.15rem;
   }
-  
-  .btn-clear {
-    margin-top: 0.25rem;
+
+  .card-badges-row {
+    max-width: 100% !important; /* Full width wrap on super small devices */
+  }
+
+  .todo-card {
+    padding-bottom: 4rem !important; /* Slightly more height for small display wrap */
   }
 }
