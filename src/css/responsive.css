@@ -1,8 +1,7 @@
-/* ==========================================================================
-   Responsive Adaptations & Support for Touch/Desktop layouts
-   ========================================================================== */
 
-/* 1. Tablet Screens & Landscape Viewports (up to 1024px width) */
+   /* Responsive Adaptations & Support for Touch/Desktop layouts */
+
+/* Tablet Screens & Landscape Viewports */
 @media (max-width: 1024px) {
   .app-content-grid {
     grid-template-columns: 1fr;
@@ -17,10 +16,7 @@
   }
 }
 
-/* 2. Mobile Screens & Portrait Tablet Viewports (up to 768px width)
-   Aligns layout strictly into a single-column block format in the designated order:
-   Quick Add Task -> Progress Summary -> Search & Filters -> Todo List
-   ========================================================================== */
+/* Mobile Screens & Portrait Tablet Viewports */
 @media (max-width: 768px) {
   .app-container {
     padding: 1.25rem 0.75rem;
@@ -30,7 +26,6 @@
     overflow-x: hidden;
   }
 
-  /* Convert the content layout into a single column */
   .app-content-grid {
     display: flex !important;
     flex-direction: column !important;
@@ -38,7 +33,6 @@
     width: 100%;
   }
 
-  /* Force the side panel column to stack vertically: Quick Add -> Progress Summary */
   .sidebar-column {
     display: flex !important;
     flex-direction: column !important;
@@ -60,19 +54,16 @@
     padding: 1.25rem;
   }
 
-  /* Quick Form fields stacking (Category & Due Date side-by-side matches single line flow) */
   .form-row {
     grid-template-columns: 1fr !important;
     gap: 1rem;
   }
 
-  /* Modal Form row stacking */
   .form-row-three {
     grid-template-columns: 1fr !important;
     gap: 1rem;
   }
 
-  /* Filter Area Stack */
   .filter-deck {
     width: 100%;
     box-sizing: border-box;
@@ -128,9 +119,7 @@
     margin-top: 0.25rem;
   }
 
-  /* ----------------------------------------------------------------------
-     Task Cards mobile layout adjustments (Thumb-friendly & prevents overlap)
-     ---------------------------------------------------------------------- */
+  /* Task Cards mobile layout adjustments */
   .todo-card {
     padding: 1.25rem 1rem 3.75rem 1rem !important; /* Generate bottom space for static buttons */
     position: relative;
@@ -141,7 +130,7 @@
     gap: 0.75rem;
   }
 
-  /* Reposition Edit/Delete actions in bottom-right corner to prevent overlapping title text */
+
   .card-actions-panel {
     position: absolute;
     bottom: 0.85rem;
@@ -153,7 +142,6 @@
     gap: 0.35rem;
   }
 
-  /* Force badges to wrap and limit aggregate width so they cannot slide under buttons */
   .card-badges-row {
     max-width: calc(100% - 115px) !important;
     display: flex;
@@ -162,9 +150,7 @@
     margin-top: 0.75rem;
   }
 
-  /* ----------------------------------------------------------------------
-     Header details & layout
-     ---------------------------------------------------------------------- */
+  /* Header layout */
   .app-header {
     padding-bottom: 1.25rem;
   }
@@ -186,7 +172,7 @@
     font-size: 1.75rem;
   }
 
-  /* Edit Dialog Modal Adjustments */
+  /* Edit Dialog Modal */
   .modal-card {
     width: 92% !important;
     max-width: 480px;
@@ -194,7 +180,7 @@
   }
 }
 
-/* 3. Small Screen Optimizations (up to 480px width) */
+/* Small Screen Optimizations (up to 480px width) */
 @media (max-width: 480px) {
   .header-title {
     font-size: 1.5rem;
@@ -210,10 +196,10 @@
   }
 
   .card-badges-row {
-    max-width: 100% !important; /* Full width wrap on super small devices */
+    max-width: 100% !important; /* Full width wrap on small devices */
   }
 
   .todo-card {
-    padding-bottom: 4rem !important; /* Slightly more height for small display wrap */
+    padding-bottom: 4rem !important; /* more height for small display wrap */
   }
 }
