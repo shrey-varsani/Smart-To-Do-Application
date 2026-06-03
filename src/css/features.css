@@ -203,7 +203,7 @@ html.dark .todo-card.drag-over {
   background-color: rgba(99, 102, 241, 0.06);
 }
 
-   /* HTML5 Drag and Drop Cursor */
+   /* Drag and Drop Cursor */
 
 /* Grabbing states */
 .todo-card[draggable="true"] {
@@ -214,7 +214,7 @@ html.dark .todo-card.drag-over {
   cursor: grabbing;
 }
 
-/* Dragging animation controls */
+/* Dragging animation */
 .todo-card.dragging {
   opacity: 0.35;
   transform: scale(0.97) rotate(0.5deg);
