@@ -1,7 +1,5 @@
+/* Responsive Adaptations & Support for Touch/Desktop layouts */
 
-   /* Responsive Adaptations & Support for Touch/Desktop layouts */
-
-/* Tablet Screens & Landscape Viewports */
 @media (max-width: 1024px) {
   .app-content-grid {
     grid-template-columns: 1fr;
@@ -16,7 +14,6 @@
   }
 }
 
-/* Mobile Screens & Portrait Tablet Viewports */
 @media (max-width: 768px) {
   .app-container {
     padding: 1.25rem 0.75rem;
@@ -119,7 +116,7 @@
     margin-top: 0.25rem;
   }
 
-  /* Task Cards mobile layout adjustments */
+  /* Task Cards mobile layout adjustments (Thumb-friendly & prevents overlap) */
   .todo-card {
     padding: 1.25rem 1rem 3.75rem 1rem !important; /* Generate bottom space for static buttons */
     position: relative;
@@ -150,7 +147,6 @@
     margin-top: 0.75rem;
   }
 
-  /* Header layout */
   .app-header {
     padding-bottom: 1.25rem;
   }
@@ -172,7 +168,6 @@
     font-size: 1.75rem;
   }
 
-  /* Edit Dialog Modal */
   .modal-card {
     width: 92% !important;
     max-width: 480px;
@@ -180,7 +175,6 @@
   }
 }
 
-/* Small Screen Optimizations (up to 480px width) */
 @media (max-width: 480px) {
   .header-title {
     font-size: 1.5rem;
