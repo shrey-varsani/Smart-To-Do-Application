@@ -118,7 +118,7 @@
 
   /* Task Cards mobile layout adjustments (Thumb-friendly & prevents overlap) */
   .todo-card {
-    padding: 1.25rem 1rem 3.75rem 1rem !important; /* Generate bottom space for static buttons */
+    padding: 1.25rem 1rem 3.75rem 1rem !important;
     position: relative;
     width: 100%;
     box-sizing: border-box;
@@ -134,7 +134,7 @@
     right: 1rem;
     top: auto !important;
     left: auto !important;
-    opacity: 1 !important; /* Permanently visible on mobile viewports */
+    opacity: 1 !important;
     display: flex;
     gap: 0.35rem;
   }
